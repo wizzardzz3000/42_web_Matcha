@@ -1,0 +1,139 @@
+<div class="row">
+  <div *ngIf="matchesObjects.length >= 1; else elseBlock5">
+      <div *ngFor="let match of matchesObjects">
+          <a (click)="loadMessages(match.id.id_match)" (click)="loadMatchInfos(match.id.id_user_matched)" style="cursor: pointer;">
+            <img class="rounded-circle m-1" src="{{ match.picture }}" height="80px" width="80px">
+          </a>
+        </div>
+  </div>
+</div>
+<!-- selected conversation pic & match name -->
+<hr>  
+<div class="p-2" *ngIf="!userMatchedName; else elseBlock">
+  <div *ngIf="matchesObjects.length >= 1">
+    <h6>Click on a match to open a conversation 😊</h6>
+  </div>
+</div>
+<ng-template class="p-2" #elseBlock>
+  <a (click)="loadMatchProfileData()" style="cursor: pointer;">
+    <img class="rounded-circle" height="80px" width="80px" src="{{ userMatchedPicture }}" alt="">
+  </a>
+  <h2 class="m-auto p-2">{{ userMatchedName | titlecase }}</h2>
+</ng-template>
+
+<!-- if select is profile, display profile, if not display contentArea -->
+<div *ngIf="profileWasOpened === 1; else elseBlock3">
+  <carousel class="p-2">
+    <div *ngFor="let pic of userMatchedPhotos">
+      <slide>
+        <img class="mx-auto" src="{{ pic.photo }}" style="display: block; height: 400px;">
+      </slide>
+    </div>
+  </carousel>
+  <div *ngIf="userInfos[0]">
+    <div *ngIf="userInfos[0].online != 1; else online">
+      <p>Last connected {{ userInfos[0].last_connected | lastConnectedFormat }}</p>
+    </div>
+    <ng-template #online>
+      <p [ngStyle]="{'color' : 'green'}">Online</p>
+    </ng-template>
+    <div class="row m-2" style="color: rgba(240, 67, 33, 0.8)">
+      <div class="col-md-4">
+        <i class="fas fa-birthday-cake proficon"></i>
+        <h5>{{ userInfos[0].birthdate }} yo</h5>
+      </div>
+      <div class="col-md-4">
+        <i class="fas fa-map-pin proficon"></i>
+        <h5>{{ userInfos[0].distance }} km</h5>
+      </div>
+      <div class="col-md-4">
+        <i class="fas fa-heart proficon"></i>
+        <h5>{{ userInfos[0].popularity }} %</h5>
+      </div>
+    </div>
+    <div *ngIf="userInfos[0].bio">
+      <h5>BIOGRAPHY</h5>
+      <p><i>'' {{ userInfos[0].bio }} ''</i></p>
+    </div>
+    <div class="row col-md-12 text-center">
+      <button type="button" class="btn btn-primary col-md-5 mx-auto" data-toggle="modal" data-target="#removeMod">
+        Remove
+      </button>
+      <button type="button" class="btn btn-primary col-md-5 mx-auto" data-toggle="modal" data-target="#reportMod">
+        Block
+      </button>
+    </div>
+  </div>
+</div>
+<ng-template #elseBlock5>
+  <h6>No matches yet 😢 Time to make some swipes!</h6>
+</ng-template>
+<ng-template #elseBlock3>
+  <div *ngIf="aConversationWasOpened === 1">
+    <div *ngIf="messageList.length > 0; else elseBlock2">
+        <!-- #scrollMe [scrollTop]="scrollMe.scrollHeight" -->
+      <div ng-controller="scrollIt">
+        <div class="card lg scroll" #scrollMe style="background-color: rgb(248, 248, 248);">
+          <div *ngFor="let message of messageList">
+            <div style="border-radius: 10px" class="toast show w-75 m-2" [ngClass]="message.id === id ? 'message2' : 'message1'">
+              <div class="toast-header">
+                <strong class="mr-auto"></strong>
+                <small>{{ message.ts | lastConnectedFormat }}</small>
+              </div>
+              <div class="toast-body p-1">
+                {{ message.msg }}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <ng-template #elseBlock2>
+      <h6>Don't be shy, make the first step! 🙃</h6>
+    </ng-template>
+  </div>
+  <div *ngIf="aConversationWasOpened === 1">
+    <form action="" [formGroup]="messageForm" (ngSubmit)="sendMessage()">
+      <div class="input-group mb-3">
+        <input type="text" formControlName="message" #message class="form-control" rows="3" aria-describedby="button-addon2">
+        <div class="input-group-append">
+          <button class="btn btn-outline-secondary" type="submit" id="button-addon2">Send</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</ng-template>
+<!-- Remove modal -->
+<div class="modal fade" id="removeMod" tabindex="-1" role="dialog" aria-labelledby="removeModLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="removeModLabel">Are you sure ?</h5>
+      </div>
+      <div class="modal-body">
+        Do you want to remove this user ?
+      </div>
+      <div class="modal-footer">
+        <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> -->
+        <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="removeUser(userInfos[0].id_user)">confirm</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Report modal -->
+<div class="modal fade" id="reportMod" tabindex="-1" role="dialog" aria-labelledby="reportModLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="reportModLabel">Are you sure ?</h5>
+      </div>
+      <div class="modal-body">
+        That person will no longer be shown to you
+      </div>
+      <div class="modal-footer">
+        <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> -->
+        <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="reportUser(userInfos[0].id_user)">BLOCK</button>    
+      </div>
+    </div>
+</div>

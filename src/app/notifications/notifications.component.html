@@ -1,0 +1,38 @@
+<div *ngIf="notifications.length > 0; else noNotif">
+  <div class="card lg scroll" #scrollMe [scrollTop]="scrollMe.scrollHeight" style="background-color: rgb(248, 248, 248);">
+    <div *ngFor="let notification of notifications; let i = index;">
+      <div class="toast show mx-auto m-2"
+          style="border-radius: 15px">
+        <div class="toast-header"
+              [ngClass]="notification.notif === 6 || notification.notif === 5 ? 'popcool' : 'popother'">
+          <strong class="mr-auto"></strong>
+          <small>{{ notification.ts | lastConnectedFormat }}</small>
+          <button type="button" class="ml-2 mb-1 close" (click)="deleteNotification(i)">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="toast-body" *ngIf="notification.notif === 1">
+          Somebody saw your profile 😮
+        </div>
+        <div class="toast-body" *ngIf="notification.notif === 2">
+          {{ notification.firstname }} {{ notification.lastname }} removed you 😢
+        </div>
+        <div class="toast-body" *ngIf="notification.notif === 3">
+          {{ notification.firstname }} {{ notification.lastname }} reported you 😭
+        </div>
+        <div class="toast-body" *ngIf="notification.notif === 4">
+          Someone just liked you! 😊
+        </div>
+        <div class="toast-body" *ngIf="notification.notif === 5">
+          You matched with {{ notification.firstname }} {{ notification.lastname }} 😍
+        </div>
+        <div class="toast-body" *ngIf="notification.notif === 6">
+          {{ notification.firstname }} sent a message 🙃
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<ng-template #noNotif>
+  <label>No notifications yet</label>
+</ng-template>

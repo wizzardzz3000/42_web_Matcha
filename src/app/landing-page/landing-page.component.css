@@ -1,0 +1,63 @@
+.landing-page {
+  position: absolute;
+  height: 100%;
+  background: url("../../assets/img/home.jpg");
+  background-size: cover;
+}
+
+.big-title {
+  -webkit-transform: translateY(10%);
+          transform: translateY(10%);
+  margin: auto;
+  width: 80%;
+  font-weight: bold;
+  text-align: center;
+}
+
+.big-title span {
+  width: 100%;
+  font-family: 'Roboto Condensed', sans-serif;
+  color: white;
+  font-size: 9vw;
+}
+
+.co {
+  width: 200px;
+  font-family: 'Roboto Condensed', sans-serif;
+  background-color: white;
+  border: 0;
+  font-size: 30px;
+  color: rgba(240, 67, 33, 0.8);
+}
+
+.co:hover {
+  background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(240, 67, 33, 0.8)), to(rgba(240, 92, 33, 0.8)));
+  background-image: linear-gradient(rgba(240, 67, 33, 0.8), rgba(240, 92, 33, 0.8));
+  color: white;
+}
+
+footer {
+  font-family: 'Roboto Condensed', sans-serif;
+  color: rgba(255, 255, 255, 0.5);
+  position: fixed;
+  background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(240, 67, 33, 0.2)), to(rgba(240, 116, 33, 0.6)));
+  background-image: linear-gradient(rgba(240, 67, 33, 0.2), rgba(240, 116, 33, 0.6));
+  left: 0;
+  bottom: 0;
+  font-size: 30px;
+  width: 100%;
+  padding: 20px;
+  text-align: center;
+}
+
+.bs-datepicker-container {
+  position: relative;
+  z-index: 10000 !important;
+}
+
+@media screen and (max-width: 600px) {
+  footer {
+    display: none;
+  }
+}
+/*# sourceMappingURL=landing-page.component.css.map */

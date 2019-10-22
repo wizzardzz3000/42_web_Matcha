@@ -1,0 +1,18 @@
+<div class="col-md-8 border rounded p-3 m-3 mx-auto">
+  <h1 class="text-center">POPULATE DATABASE</h1>
+  <div class="input-group mb-3 col-md-5 mx-auto">
+    <input [(ngModel)]="nbUser" type="number" class="form-control"  placeholder="User quantity"
+            aria-label="Recipient's username" aria-describedby="button-addon2">
+    <div class="input-group-append">
+      <button (click)="populate()" class="btn btn-outline-secondary" type="button" id="button-addon2">Populate</button>
+    </div>
+  </div>
+  <div *ngIf="progress">
+    <div class="mb-3 col-md-10 mx-auto">
+      <div class="progress">
+        <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
+      </div>
+    </div>
+    <div class="p-5">{{ resolvePopulate | json }}</div>
+  </div>
+</div>

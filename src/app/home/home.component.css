@@ -1,0 +1,196 @@
+@import url("https://fonts.googleapis.com/css?family=Amatic+SC&display=swap");
+.fullView {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  background: url("../../assets/img/home.jpg");
+  background-size: cover;
+}
+
+.logo {
+  margin-top: 60px;
+}
+
+.swipe-buttons {
+  text-align: center;
+}
+
+.swipe-buttons i {
+  margin: 10px;
+  font-size: 40px;
+  background-color: white;
+  border-radius: 100%;
+}
+
+.swipe-buttons i:hover {
+  -webkit-transform: scale(1.1);
+          transform: scale(1.1);
+}
+
+.loader {
+  -webkit-animation: spin 4s linear infinite;
+  animation: spin 4s linear infinite;
+}
+
+@-webkit-keyframes spin {
+  100% {
+    -webkit-transform: rotate(360deg);
+  }
+}
+
+@keyframes spin {
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+
+.match-zone {
+  overflow: hidden;
+  right: 0;
+  position: absolute;
+  height: 100%;
+  padding: 0;
+  background-color: rgba(245, 247, 250, 0.884);
+}
+
+.match-zone .swipe-zone {
+  height: 80%;
+  width: 100%;
+}
+
+.match-zone .swipe-zone .swipe {
+  margin: auto;
+}
+
+.match-zone .swipe-zone .tag {
+  background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(240, 67, 33, 0.8)), to(rgba(240, 92, 33, 0.8)));
+  background-image: linear-gradient(rgba(240, 67, 33, 0.8), rgba(240, 92, 33, 0.8));
+}
+
+body .ui-slider .ui-slider-range {
+  background-color: black;
+}
+
+.photoAdd {
+  height: 150px;
+  width: 150px;
+  background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(240, 67, 33, 0.5)), to(rgba(240, 92, 33, 0.5)));
+  background-image: linear-gradient(rgba(240, 67, 33, 0.5), rgba(240, 92, 33, 0.5));
+}
+
+.noPic i {
+  font-size: 60px;
+  vertical-align: middle;
+}
+
+.navbar {
+  padding: 0;
+}
+
+.navbar .nav-link {
+  text-align: center;
+  color: white;
+  font-size: 25px;
+}
+
+.navbar .nav-item {
+  background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(240, 67, 33, 0.8)), to(rgba(240, 92, 33, 0.8)));
+  background-image: linear-gradient(rgba(240, 67, 33, 0.8), rgba(240, 92, 33, 0.8));
+}
+
+.navbar .nav-item:hover {
+  cursor: pointer;
+  background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(240, 67, 33, 0.7)), to(rgba(240, 92, 33, 0.7)));
+  background-image: linear-gradient(rgba(240, 67, 33, 0.7), rgba(240, 92, 33, 0.7));
+}
+
+.container, .container3 {
+  overflow: hidden;
+  position: relative;
+  height: 710px;
+  width: 530px;
+  margin-top: 460px;
+}
+
+.container {
+  float: left;
+}
+
+.container3 {
+  float: right;
+}
+
+.slider1, .slider3 {
+  overflow-y: scroll;
+  /* complete liquid height based on the parent's height!! */
+  height: 100%;
+  width: 100%;
+  /* only transition on transform properties which are hardware accelerated = way better performances */
+  -webkit-transition: -webkit-transform .3s ease;
+  transition: -webkit-transform .3s ease;
+  transition: transform .3s ease;
+  transition: transform .3s ease, -webkit-transform .3s ease;
+}
+
+.slider1.opened, .slider3.opened {
+  /* visible */
+  -webkit-transform: translate(0, 100%);
+  transform: translate(0, 100%);
+}
+
+.slider1.closed, .slider3.closed {
+  /* completely offscreen */
+  -webkit-transform: translate(0, 0%);
+  transform: translate(0, 0%);
+}
+
+/* -------- not interesting styles ----------- */
+.slider1, .slider3 {
+  -webkit-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+.match {
+  display: none;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.match h1 {
+  font-size: 10vh;
+  font-family: 'Amatic SC', cursive;
+  color: #aaffaa;
+}
+
+.match .scale-in-center {
+  -webkit-animation: scale-in-center 2s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0s both;
+  animation: scale-in-center 2s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0s both;
+}
+
+@-webkit-keyframes scale-in-center {
+  0% {
+    -webkit-transform: scale(0);
+    transform: scale(0);
+    opacity: 1;
+  }
+  100% {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes scale-in-center {
+  0% {
+    -webkit-transform: scale(0);
+    transform: scale(0);
+    opacity: 1;
+  }
+  100% {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+/*# sourceMappingURL=home.component.css.map */

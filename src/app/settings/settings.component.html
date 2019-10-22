@@ -1,0 +1,123 @@
+<!-- Username modal -->
+<div class="modal fade" id="usernameModal" tabindex="-1" role="dialog" aria-labelledby="usernameModal" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-body text-center">
+          <h3>{{ resolvedData.firstname | titlecase }} {{ resolvedData.lastname | titlecase }} </h3><br>
+        <form [formGroup]="changeNameForm" (ngSubmit)="updateName()">
+          <div class="form-group">
+            <input
+            type="text"
+            class="form-control"
+            name="newFirstName" 
+            id="newFirstName"
+            #newFirstName
+            placeholder="New firstname"
+            formControlName="newFirstName">
+          </div>
+          <div class="form-group">
+            <input
+            type="text"
+            class="form-control" 
+            name="newLastName" 
+            id="newLastName"
+            #newLastName
+            placeholder="New lastname"
+            formControlName="newLastName">
+          </div>
+          <div class="modal-footer">
+            <button type="submit" class="btn btn-primary m-auto">SAVE</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Email modal -->
+<div class="modal fade" id="emailModal" tabindex="-1" role="dialog" aria-labelledby="emailModal" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-body text-center">
+          <h3 class="p-2">{{ resolvedData.email }}</h3>
+          <form [formGroup]="changeEmailForm" (ngSubmit)="updateEmail()">
+            <div class="form-group">
+              <input 
+              type="text" 
+              class="form-control" 
+              name="newEmail"
+              id="newEmail"
+              #newEmail
+              formControlName="newEmail"
+              placeholder="New email">
+            </div>
+            <p id="email_message" class="email_message"></p>
+            <div class="modal-footer">
+              <button type="submit" class="btn btn-primary m-auto">SAVE</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<!-- Password modal -->
+<div class="modal fade" id="passwordModal" tabindex="-1" role="dialog" aria-labelledby="passwordModal" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-body text-center">
+        <form [formGroup]="changePasswordForm" (ngSubmit)="updatePassword()">
+          <div class="form-group">
+            <input 
+              type="password" 
+              class="form-control" 
+              name="currentPassword" 
+              id="currentPassword"
+              #currentPassword
+              formControlName="currentPassword"
+              placeholder="Current password"
+            >
+          </div>
+          <div class="form-group">
+            <input 
+              type="password" 
+              class="form-control" 
+              name="newPassword" 
+              id="newPassword"
+              #newPassword
+              formControlName="newPassword"
+              placeholder="New password, at least 8 letters + digits"
+            >
+          </div>
+          <div class="form-group">
+            <input 
+              type="password" 
+              class="form-control" 
+              name="newPasswordConfirmation" 
+              id="newPasswordConfirmation"
+              #newPasswordConfirmation
+              formControlName="newPasswordConfirmation"
+              placeholder="Confirm new password"
+              >
+          </div>
+          <p id="password_match_message" class="password_match_message"></p>
+          <div class="modal-footer">
+            <button type="submit" class="btn btn-primary m-auto">SAVE</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container">
+  <div class="form-group mb-2">
+    <button class="btn btn-light auto"  style="width: 100%;" data-toggle="modal" data-target="#usernameModal"> Username </button>
+  </div>
+  <div class="form-group mb-2">
+    <button class="btn btn-light auto"  style="width: 100%;" data-toggle="modal" data-target="#emailModal"> Email </button>
+  </div>
+  <div class="form-group mb-2">
+    <button class="btn btn-light auto" style="width: 100%;" data-toggle="modal" data-target="#passwordModal"> Password </button>
+  </div>
+</div>
+
+

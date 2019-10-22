@@ -1,0 +1,18 @@
+.img-wrap button {
+  width: 25px;
+  height: 25px;
+  opacity: 1;
+  background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(240, 67, 33, 0.8)), to(rgba(240, 92, 33, 0.8)));
+  background-image: linear-gradient(rgba(240, 67, 33, 0.8), rgba(240, 92, 33, 0.8));
+  border-radius: 100%;
+  color: white;
+  position: absolute;
+  right: 1px;
+  z-index: 100;
+}
+
+#selected-tag {
+  background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(240, 67, 33, 0.8)), to(rgba(240, 92, 33, 0.8)));
+  background-image: linear-gradient(rgba(240, 67, 33, 0.8), rgba(240, 92, 33, 0.8));
+}
+/*# sourceMappingURL=preferences.component.css.map */

@@ -1,0 +1,221 @@
+<div class="landing-page">
+  <nav class="navbar navbar-expand-lg">
+      <div class="navbar-brand ml-3">
+        <a [routerLink]="['/']">
+          <img class="ml-5" src="../../assets/img/logo.svg" height="90" alt="">
+        </a>
+      </div>
+      <div class="collapse navbar-collapse">
+          <ul class="navbar-nav mr-auto mt-2 mt-lg-0"></ul>
+      </div>
+  </nav>
+  <div class="big-title">
+      <span>Le premier site de rencontre gourmand</span>
+      <!-- Button trigger modal register -->
+      <button class="btn co m-3" class="btn co m-3" data-toggle="modal" data-target="#modRegister">
+          REGISTER
+      </button>
+      <!-- Button trigger modal log in -->
+      <button class="btn co m-3" class="btn co m-3" data-toggle="modal" data-target="#modSignIn">
+        LOG IN
+      </button>
+  </div>
+</div>
+<!-- Login modal -->
+<div class="modal fade" id="modSignIn" tabindex="-1" role="dialog" aria-labelledby="modSignIn" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div class="logo m-auto">
+          <img src="../../assets/img/logo-min.svg" height="100px" alt="">
+        </div>
+        <button type="button" class="close m-0 p-0" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <h2 class="m-auto p-2">HELLO</h2>
+      <div class="modal-body text-center">
+        <div *ngIf="forgotModeVar === 0; else forgotForm" >
+          <div class="form-group">
+            <button type="button" class="btn btn-primary btn-block" (click)="facebookAuth();">LOG IN WITH FACEBOOK</button>
+          </div>
+          <hr>
+          <form [formGroup]="loginForm" (ngSubmit)="login()">
+            <div class="form-group">
+              <label>Email address</label>
+              <input type="email" formControlName="email" class="form-control" placeholder="Enter email">
+            </div>
+            <div class="form-group">
+              <label>Password</label>
+              <input type="password" formControlName="password" class="form-control" placeholder="Password">
+              <button type="button" (click)="forgotMode()" class="btn btn-link">I forgot my password</button>
+            </div>
+            <div class="modal-footer">
+              <button type="submit" class="btn btn-primary m-auto">LOG IN</button>
+            </div>
+          </form>
+        </div>
+        <ng-template #forgotForm>
+          <form [formGroup]="forgotPasswordForm" (ngSubmit)="askForPasswordReset()">
+              <div class="form-group">
+                <label>Email address</label>
+                <input type="email" formControlName="email" class="form-control" placeholder="Enter email">
+              </div>
+              <div class="modal-footer">
+                <button type="submit" class="btn btn-primary m-auto">SEND</button>
+              </div>
+              <button type="button" (click)="forgotMode()" class="btn btn-link">Changed my mind!</button>
+            </form>
+        </ng-template>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Reset password modal -->
+<!-- <div *ngIf="readyToResetPassword === 1"> -->
+  <div class="modal fade" id="modResetPwd" tabindex="-1" role="dialog" aria-labelledby="modResetPwd" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <div class="logo m-auto">
+            <img src="../../assets/img/logo-min.svg" height="100px" alt="">
+          </div>
+          <button type="button" class="close m-0 p-0" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <h2 class="m-auto p-2">RESET YOUR PASSWORD</h2>
+        <div class="modal-body text-center">
+          <form [formGroup]="resetPasswordForm" (ngSubmit)="saveNewPassword()">
+            <div class="form-group">
+              <label>New password, 8 characters minimum</label>
+              <input type="password" formControlName="newPassword" class="form-control" placeholder="New password">
+            </div>
+            <div class="form-group">
+              <label>Confirm password</label>
+              <input type="password" formControlName="newPasswordConfirmation" class="form-control" placeholder="Confirm new password">
+            </div>
+            <div class="modal-footer">
+              <button type="submit" class="btn btn-primary m-auto">RESET PASSWORD</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+<!-- </div> -->
+<!-- Register modal -->
+<div class="modal modal-profile fade" id="modRegister" tabindex="-1" role="dialog" aria-labelledby="modRegister" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <div class="logo m-auto">
+            <img src="../../assets/img/logo-min.svg" height="100px" alt="">
+          </div>
+          <button type="button" class="close m-0 p-0" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <h2 class="m-auto p-2">WELCOME ON BOARD</h2>
+        <div class="modal-body text-center">
+          <div class="form-group">
+            <button type="button" class="btn btn-primary btn-block">REGISTER WITH FACEBOOK</button>
+          </div>
+          <hr>
+          <form [formGroup]="registerForm" (ngSubmit)="register()">
+            <div class="form-group">
+              <label>Firstname</label>
+              <div class="form-group">
+                <input 
+                type="text" 
+                class="form-control" 
+                name="firstname" 
+                id="firstname"
+                #firstname
+                placeholder="Firstname"
+                formControlName="firstname"
+                >
+              </div>
+              <p id="firstname_message" class="firstname_message"></p>
+            </div>
+            <div class="form-group">
+              <label>Lastname</label>
+              <div class="form-group">
+                <input 
+                type="text" 
+                class="form-control" 
+                name="lastname" 
+                id="lastname"
+                #newLastName
+                placeholder="Lastname"
+                formControlName="lastname"
+                >
+              </div>
+              <p id="lastname_message" class="lastname_message"></p>
+            </div>
+            <div class="form-group">
+              <label>Email address</label>
+              <div class="form-group">
+                <input 
+                type="text" 
+                class="form-control" 
+                name="email"
+                id="email"
+                #email
+                formControlName="email"
+                placeholder="Email"
+                >
+              </div>
+              <p id="email_message" class="email_message"></p>
+            </div>
+            <div class="form-group">
+              <label>Birthdate</label>
+              <input type="text"
+              placeholder="Birthdate"
+              formControlName="birthdate"
+              [bsConfig]="datePickerConfig"
+              class="form-control"
+              bsDatepicker>
+            </div>
+            <div class="form-group">
+              <label>Password</label>
+              <input 
+              type="password" 
+              class="form-control" 
+              name="password" 
+              id="password"
+              #password
+              formControlName="password"
+              placeholder="Password, at least 8 letters + digits"
+              >
+            </div>
+            <div class="form-group">
+              <input 
+              type="password" 
+              class="form-control" 
+              name="passwordConfirmation" 
+              id="passwordConfirmation"
+              #passwordConfirmation
+              formControlName="passwordConfirmation"
+              placeholder="Confirm password"
+          >
+            </div>
+            <p id="password_match_message" class="password_match_message"></p>
+            <div class="form-group">
+              <label>Gender</label>
+              <select class="custom-select" formControlName="gender">
+                <option selected>Male</option>
+                <option>Female</option>
+              </select>
+            </div>
+            <div class="modal-footer">
+              <button type="submit" class="btn btn-primary m-auto">REGISTER</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+</div>
+<footer>
+    <p>© 2019 made with ☕️ by Clément and Martin</p>
+</footer>

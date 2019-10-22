@@ -1,0 +1,244 @@
+<div class="home">
+  <div class="match" style="position: absolute; width: 100%; height: 100%; z-index: 100000; padding: 0">
+    <div style="position: absolute; top: 30%; left: 75%; width: 100%; transform: translate(-50%, -50%);">
+      <h1 class="scale-in-center">It's a match ! 😍</h1>
+    </div>
+  </div>
+  <div class="match-zone col-md-12 text-center">
+    <a href=""><img class="logo" src="../../assets/img/logo.svg" height="70" alt=""></a>
+    <div *ngIf="profileComplete === 1;">
+      <div class="card mt-2" style="background-color: rgba(255, 255, 255, 0); border: none;">
+        <div class="card-body">
+          <div *ngIf="progressBarValue < 100; else showHeavens"  class="heavens">
+            <br>
+            <div class="progress">
+              <div class="progress-bar bg-danger" role="progressbar" [ngStyle]="{ width: progressBarValue + '%' }" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+            </div>
+          </div>
+          <ng-template #showHeavens>
+            <div *ngIf="heavensClicked === 0">
+              <button class="showMTH" (click)="showMeTheHeavens()" type="button" class="btn btn-light">✨ Show me the heavens! ✨</button>
+            </div>
+          </ng-template>
+        </div>
+      </div>
+    </div>
+
+    <!-- THE HEAVENS -->
+    <div *ngIf="peopleInHeavens.length > 0 && heavensClicked === 1">
+      <div class="card mb-1" style="background-color: rgba(255, 255, 255, 0); border: none;">
+          <div class="card-body">
+              <label><strong>✨ Here are the people you can match with ✨</strong></label>
+          </div>
+        </div>
+      <div class="scroll">
+        <div class="row card-group">
+          <div class="mb-4 col-sm-2" *ngFor="let people of peopleInHeavens; let i = index;">
+            <div class="card" style="opacity: 0">
+              <img class="card-img-top" src="{{ people.photo }}" alt="Card image cap">
+              <div class="card-body">
+                <h5 class="card-title"> {{ people.firstname }}</h5>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SWIPE ZONE -->
+    <div class="swipe-zone mt-4">
+      <div *ngIf="profileComplete === 1; else profileIncomplete">
+          <div *ngIf="userToSwipe; else noUserToSwipe"  class="swipe col-sm-6 col-md-10 col-lg-6 col-xl-5 h-80">
+            <div class="card mb-3">
+              <div class="row no-gutters">
+                <div class="col-md-8">
+                  <carousel>
+                    <div *ngFor="let photo of userToSwipePhotos">
+                      <slide>
+                        <button class="rounded-circle btn-primary" type="button" 
+                                style="height: 30px; width: 30px;"
+                                data-toggle="modal" data-target="#reportHomeMod">
+                                <i class="fas fa-flag"></i>
+                        </button>
+                        <img src="{{ photo.photo }}" style="max-height: 50vh; float: left;">
+                      </slide>
+                    </div>
+                  </carousel>
+                </div>
+                <div class="col-md-4 p-0">
+                  <div class="card-body text-left">
+                    <div *ngIf="userToSwipeOnline === 1; else elseBlock">
+                        <h6 style="color: green;">Online</h6>
+                    </div>
+                    <ng-template #elseBlock>
+                        <h6>{{ userToSwipeLastConnected | lastConnectedFormat }}</h6>
+                    </ng-template>
+                    <h2>{{ userToSwipeName | titlecase }} {{ userToSwipeAge }}</h2>
+                    <h5>{{ userToSwipeDistance }} km</h5>
+                    <h6>{{ userToSwipePopularity }}% trendy</h6>
+                    <div class="row">
+                      <div *ngFor="let tag of userToSwipeTags" class="mb-2">
+                        <div class="tag p-1 m-2 rounded-pill">{{ tag.tag }}</div>
+                      </div>
+                    </div>
+                    <div *ngIf="userToSwipeBio">
+                      <p class="card-text"><i>'' {{ userToSwipeBio }} ''</i></p>
+                    </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div *ngIf="userToSwipe" class="swipe-buttons m-auto align-items-center">
+            <button (click)="swipe(false)" style="color: rgb(255, 61, 61)" class="btn"><i class="fas fa-heart-broken p-3"></i></button>
+            <button (click)="swipe(true)" style="color: rgb(96, 190, 96)" class="btn"><i class="fas fa-heart p-3"></i></button>
+          </div>
+        </div>
+      </div>
+      <ng-template #profileIncomplete>
+          <div style="position: absolute; width: 100%; height: 100%; padding: 0">
+              <div style="position: absolute; top: 30%; left: 50%; transform: translate(-50%, -50%);">
+                <h2 style="font-size: 3vh">You can't swipe without a picture, complete your profile now! 🙃</h2>
+                <button type="button" data-toggle="modal" data-target="#modSignIn" class="btn btn-primary m-2">Preferences</button>
+              </div>
+            </div>
+      </ng-template>
+    </div>
+    <ng-template #noUserToSwipe>
+      <div style="position: absolute; width: 100%; height: 100%; padding: 0">
+        <div style="position: absolute; top: 30%; left: 50%; transform: translate(-50%, -50%);">
+          <img class="loader" src="assets/img/loader.svg" height="100" alt="">
+          <h2 style="font-size: 3vh">You have eaten all the Qinders</h2>
+          <button type="button" data-toggle="modal" data-target="#modSignIn" class="btn btn-primary m-2">Preferences</button>
+        </div>
+      </div>
+    </ng-template>
+  </div>
+
+  <!-- Profile modal -->
+  <div class="modal fade" id="modSignIn" tabindex="-1" role="dialog" aria-labelledby="modSignIn" aria-hidden="true">
+    <div class="modal-dialog modal-lg-8" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close m-0 p-0" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <h2 class="m-auto p-2">{{ firstName | uppercase }}</h2>
+        <div class="modal-body text-center">
+          <app-preferences [resolveData]="resolveData"
+                          [userPhotos]="userPhotos"
+                          (updateEvent)="getUserToSwipe()"
+                          (updateResolveDataHome)="resolveData"
+                          (updatePhotos)="initUserPic()"
+          >
+          </app-preferences>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Chat modal -->
+  <div class="modal fade" id="modChat" tabindex="-1" role="dialog" aria-labelledby="modChat" aria-hidden="true">
+    <div class="modal-dialog modal-lg-8" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close m-0 p-0" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <h2 class="m-auto p-2">Your matches</h2>
+        <div class="modal-body text-center">
+          <app-chat [resolveData]="resolveData"></app-chat>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Notifications modal -->
+  <div class="modal fade" id="modNotif" tabindex="-1" role="dialog" aria-labelledby="modNotif" aria-hidden="true">
+    <div class="modal-dialog modal-xs" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close m-0 p-0" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <h2 class="m-auto p-2">Notifications</h2>
+        <div class="modal-body text-center">
+          <app-notifications></app-notifications>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Report modal -->
+  <div class="modal fade" id="reportHomeMod" tabindex="-1" role="dialog" aria-labelledby="reportHomeModLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="reportHomeModLabel">Are you sure ?</h5>
+        </div>
+        <div class="modal-body">
+          That person will no longer be shown to you
+        </div>
+        <div class="modal-footer">
+          <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> -->
+          <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="reportUser()">BLOCK</button>    
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Menu -->
+  <nav class="fixed-bottom">
+    <ul class="p-0 m-0 row text-center w-100">
+      <li class="navitem" data-toggle="modal" data-target="#modChat">
+        <a class="navlink">
+          <i class="fas fa-comments"></i>
+          <span *ngIf="nbMessages > 0" class="badge badge-light" style="font-size: 12px">
+            {{ nbMessages }}
+          </span>
+        </a>
+      </li>
+      <li class="navitem" data-toggle="modal" data-target="#modSignIn">
+        <a class="navlink">
+          <i class="fas fa-user"></i>
+        </a>
+      </li>
+      <li class="navitem" data-toggle="modal" data-target="#modNotif">
+        <a class="navlink">
+          <i class="fas fa-bell"></i>
+          <span *ngIf="notifications.length > 0" class="badge badge-light" style="font-size: 12px">
+            {{ notifications.length }}
+          </span>
+        </a>
+      </li>
+    </ul>
+  </nav>
+</div>
+<!-- <nav class="navbar navbar-expand-lg fixed-bottom">
+    <div class="collapse navbar-collapse">
+      <ul class="navbar-nav col-md-12 p-0">
+        <li class="nav-item col-md-4">
+          <a class="nav-link" data-toggle="modal" data-target="#modChat">
+            <i class="fas fa-comments"></i>
+            <span *ngIf="nbMessages > 0" class="badge badge-light" style="font-size: 12px">
+              {{ nbMessages }}
+            </span>
+          </a>
+        </li>
+        <li class="nav-item col-md-4">
+          <a class="nav-link" data-toggle="modal" data-target="#modSignIn">
+            <i class="fas fa-user"></i>
+          </a>
+        </li>
+        <li class="nav-item col-md-4">
+          <a class="nav-link" data-toggle="modal" data-target="#modNotif">
+            <i class="fas fa-bell"></i>
+            <span *ngIf="notifications.length > 0" class="badge badge-light" style="font-size: 12px">
+              {{ notifications.length }}
+            </span>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+</div> -->

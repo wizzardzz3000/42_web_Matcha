@@ -1,0 +1,32 @@
+.message1 {
+    float: left;
+    background-image: linear-gradient(rgba(231, 229, 229, 0.5), rgba(221, 217, 217, 0.7));
+
+}
+.message2 {
+    float: right;
+    color: rgb(255, 255, 255);
+    background-image: linear-gradient(rgba(240, 67, 33, 0.6), rgba(240, 92, 33, 0.9));
+}
+
+.infosLabel1 {
+    float: left;
+}
+.infosLabel2 {
+    float: right;
+}
+
+.scroll {
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+/** SOCKET IO CHAT **/
+#messages { list-style-type: none; margin: 0; padding: 0; }
+#messages li { padding: 5px 10px; }
+#messages li:nth-child(odd) { background: #eee; }
+
+.proficon {
+    color: rgba(240, 67, 33, 0.8);
+    font-size: 50px;
+}
