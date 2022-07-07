@@ -38,7 +38,7 @@
     "http2": "^3.3.7",
     "jquery": "^3.4.1",
     "jwt-decode": "^2.2.0",
-    "moment": "^2.24.0",
+    "moment": "^2.29.4",
     "ng-bootstrap": "^1.6.3",
     "ngx-bootstrap": "^4.3.0",
     "ngx-socket-io": "^2.1.1",
